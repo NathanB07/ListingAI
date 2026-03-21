@@ -11,8 +11,9 @@ export default async function handler(req, res) {
   const allowedOrigins = [
     "https://listingai.co",
     "https://www.listingai.co",
-    "http://localhost:5173",   // local dev
-    "http://localhost:4173",   // local preview
+    "https://listing-ai-lake.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:4173",
   ];
 
   const origin = req.headers.origin || "";
