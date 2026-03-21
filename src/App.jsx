@@ -414,7 +414,7 @@ function ListingAI() {
   const [view, setView] = useState("form");
   const [copiedKey, setCopiedKey] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [usageCount, setUsageCount] = useState(0);
+  const [usageCount, setUsageCount] = useState(() => { return parseInt(localStorage.getItem("lai_usage") || "0"); });
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [shareToast, setShareToast] = useState(false);
@@ -459,7 +459,7 @@ function ListingAI() {
       const parsed = parseSections(text);
       setSections(parsed);
       setActiveSection(0);
-      setUsageCount(c => c + 1);
+      setUsageCount(c => { const next = c + 1; localStorage.setItem("lai_usage", next); return next; });
       setHistory(h => [{ id: Date.now(), address: form.address, price: form.price, market: form.market, sections: parsed, timestamp: new Date().toLocaleString() }, ...h.slice(0, 11)]);
       clearInterval(progressRef.current); setProgress(100);
     } catch { setOutput("Connection error. Please try again."); clearInterval(progressRef.current); setProgress(0); }
