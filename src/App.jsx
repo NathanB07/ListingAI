@@ -594,7 +594,7 @@ function ListingAI() {
 
       {/* FORM VIEW */}
       {view === "form" && (
-        <div style={{ maxwidth: "100%", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
+        <div style={{ maxWidth: "960px", margin: "0 auto", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
           <div style={{ marginBottom: "36px" }}>
             <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "4px", color: "#8a7a5a", marginBottom: "10px" }}>LISTING AI — NEW GENERATION</div>
             <h1 style={{ fontSize: "40px", fontWeight: "300", lineHeight: "1.1", marginBottom: "10px" }}>Every word your listing<br /><em style={{ color: "#c8a96e" }}>needs to sell.</em></h1>
@@ -743,7 +743,7 @@ function ListingAI() {
 
       {/* HISTORY VIEW */}
       {view === "history" && (
-        <div style={{ maxwidth: "100%", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
+        <div style={{ maxWidth: "960px", margin: "0 auto", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>GENERATION HISTORY</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Past Listings</h2>
           {history.length === 0 ? (
@@ -766,7 +766,7 @@ function ListingAI() {
 
       {/* FAVORITES VIEW */}
       {view === "favorites" && (
-        <div style={{ maxwidth: "100%", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
+        <div style={{ maxWidth: "960px", margin: "0 auto", margin: "0 auto", padding: "44px 40px" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>STARRED SECTIONS</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Saved Copy</h2>
           {Object.values(favorites).filter(Boolean).length === 0 ? (
