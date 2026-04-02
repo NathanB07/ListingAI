@@ -537,16 +537,16 @@ function ListingAI() {
             <div style={{ fontSize: "36px", marginBottom: "16px" }}>⚡</div>
             <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#c8a96e", marginBottom: "10px" }}>FREE TIER COMPLETE</div>
             <h2 style={{ fontSize: "28px", fontWeight: "300", marginBottom: "12px" }}>You've used all 5 free generations</h2>
-            <p style={{ fontSize: "15px", color: "#8a7a5a", lineHeight: "1.8", marginBottom: "32px", fontWeight: "300" }}>Upgrade to continue generating unlimited listing copy. Agent plan starts at $29/month — less than one listing description from a copywriter.</p>
+            <p style={{ fontSize: "15px", color: "#8a7a5a", lineHeight: "1.8", marginBottom: "32px", fontWeight: "300" }}>Upgrade to continue generating unlimited listing copy. Agent plan starts at $59/month — less than one listing description from a copywriter.</p>
             <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
               <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#8a7a5a", marginBottom: "8px" }}>AGENT</div>
-                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$29<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
-                <div style={{ fontSize: "11px", color: "#5a4a2a" }}>75 generations</div>
+                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$99<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
+                <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited generations</div>
               </div>
               <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.4)", borderRadius: "12px", background: "rgba(200,169,110,0.05)" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#c8a96e", marginBottom: "8px" }}>PRO — POPULAR</div>
-                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$59<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
+                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$99<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited</div>
               </div>
             </div>
