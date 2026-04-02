@@ -488,7 +488,7 @@ function ListingAI() {
     <div style={{ minHeight: "100vh", width: "100%", background: "#0c0a06", color: "#f0ebe0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}
+        *{box-sizing:border-box;margin:0;padding:0;}html,body,#root{width:100%;min-height:100vh;}
         ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-thumb{background:rgba(200,169,110,0.2);}
         input:focus,textarea:focus,select:focus{border-color:rgba(200,169,110,0.45)!important;box-shadow:0 0 0 3px rgba(200,169,110,0.06);outline:none;}
         .btn-main:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,169,110,0.25);}
