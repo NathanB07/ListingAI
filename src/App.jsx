@@ -252,7 +252,7 @@ function LandingPage({ onStartFree }) {
             </div>
             <div className="p-card">
               <div className="p-tier">Agent</div>
-              <div className="p-price">$29<span>/mo</span></div>
+              <div className="p-price">$59<span>/mo</span></div>
               <div className="p-desc">For individual agents</div>
               <ul className="p-list"><li>75 generations/month</li><li>30-day history</li><li>All 3 tones</li><li>Email support</li></ul>
               <button className="p-btn o" onClick={onStartFree}>Start Agent Plan</button>
@@ -260,7 +260,7 @@ function LandingPage({ onStartFree }) {
             <div className="p-card featured">
               <div className="p-badge">Most Popular</div>
               <div className="p-tier">Pro Agent</div>
-              <div className="p-price">$59<span>/mo</span></div>
+              <div className="p-price">$99<span>/mo</span></div>
               <div className="p-desc">For serious producers</div>
               <ul className="p-list"><li>Unlimited generations</li><li>Full history, forever</li><li>Priority support</li><li>Early feature access</li></ul>
               <button className="p-btn g" onClick={onStartFree}>Start Pro Free</button>
