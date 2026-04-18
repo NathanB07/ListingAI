@@ -451,7 +451,7 @@ function ListingAI() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ system: SYSTEM_PROMPT(form.tone, `${market?.label} (${market?.sub})`), max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
+        body: JSON.stringify({ system: SYSTEM_PROMPT(form.tone, `${market?.label} (${market?.sub})`), max_tokens: 4000, messages: [{ role: "user", content: prompt }] })
       });
       const data = await res.json();
       const text = data.content?.map(b => b.text || "").join("\n") || "Generation failed.";
@@ -541,7 +541,7 @@ function ListingAI() {
             <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
               <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#8a7a5a", marginBottom: "8px" }}>AGENT</div>
-                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$99<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
+                <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$59<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited generations</div>
               </div>
               <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.4)", borderRadius: "12px", background: "rgba(200,169,110,0.05)" }}>

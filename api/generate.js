@@ -12,6 +12,8 @@ export default async function handler(req, res) {
     "https://listingai.co",
     "https://www.listingai.co",
     "https://listing-ai-lake.vercel.app",
+    "https://listingai.dev",
+    "https://www.listingai.dev",
     "http://localhost:5173",
     "http://localhost:4173",
   ];
@@ -70,7 +72,7 @@ export default async function handler(req, res) {
   }
 
   // Cap tokens — prevents someone crafting a huge request to drain your credits
-  const safeTokens = Math.min(typeof max_tokens === "number" ? max_tokens : 1000, 1500);
+  const safeTokens = Math.min(typeof max_tokens === "number" ? max_tokens : 4000, 4000);
 
   // ── 5. Call Anthropic — API key stays here on the server ─────────────────
   try {
