@@ -255,7 +255,7 @@ function LandingPage({ onStartFree }) {
               <div className="p-price">$59<span>/mo</span></div>
               <div className="p-desc">For individual agents</div>
               <ul className="p-list"><li>75 generations/month</li><li>30-day history</li><li>All 3 tones</li><li>Email support</li></ul>
-              <button className="p-btn o" onClick={() => window.open(https://buy.stripe.com/eVq5kC5cN03e7n655w8k800', '_blank')}>Start Agent Plan</button>
+              <button className="p-btn o" onClick={() => window.open('https://buy.stripe.com/eVq5kC5cN03e7n655w8k800', '_blank')}>Start Agent Plan</button>
             </div>
             <div className="p-card featured">
               <div className="p-badge">Most Popular</div>
