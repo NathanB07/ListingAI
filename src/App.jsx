@@ -539,12 +539,12 @@ function ListingAI() {
             <h2 style={{ fontSize: "28px", fontWeight: "300", marginBottom: "12px" }}>You've used all 5 free generations</h2>
             <p style={{ fontSize: "15px", color: "#8a7a5a", lineHeight: "1.8", marginBottom: "32px", fontWeight: "300" }}>Upgrade to continue generating unlimited listing copy. Agent plan starts at $59/month — less than one listing description from a copywriter.</p>
             <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
-              <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px" }}>
+              <div onClick={() => window.open('https://buy.stripe.com/eVq5kC5cN03e7n655w8k800', '_blank')} style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px", cursor: "pointer" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#8a7a5a", marginBottom: "8px" }}>AGENT</div>
                 <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$59<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited generations</div>
               </div>
-              <div style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.4)", borderRadius: "12px", background: "rgba(200,169,110,0.05)" }}>
+              <div onClick={() => window.open('https://buy.stripe.com/dRm7sK8oZbLW6j29lM8k801', '_blank')} style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.4)", borderRadius: "12px", background: "rgba(200,169,110,0.05)", cursor: "pointer" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#c8a96e", marginBottom: "8px" }}>PRO — POPULAR</div>
                 <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$99<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited</div>
