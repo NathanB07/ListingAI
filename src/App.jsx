@@ -255,7 +255,7 @@ function LandingPage({ onStartFree }) {
               <div className="p-price">$59<span>/mo</span></div>
               <div className="p-desc">For individual agents</div>
               <ul className="p-list"><li>75 generations/month</li><li>30-day history</li><li>All 3 tones</li><li>Email support</li></ul>
-              <button className="p-btn o" onClick={onStartFree}>Start Agent Plan</button>
+              <button className="p-btn o" onClick={() => window.open(https://buy.stripe.com/eVq5kC5cN03e7n655w8k800', '_blank')}>Start Agent Plan</button>
             </div>
             <div className="p-card featured">
               <div className="p-badge">Most Popular</div>
@@ -263,14 +263,14 @@ function LandingPage({ onStartFree }) {
               <div className="p-price">$99<span>/mo</span></div>
               <div className="p-desc">For serious producers</div>
               <ul className="p-list"><li>Unlimited generations</li><li>Full history, forever</li><li>Priority support</li><li>Early feature access</li></ul>
-              <button className="p-btn g" onClick={onStartFree}>Start Pro Free</button>
+              <button className="p-btn g" onClick={() => window.open('https://buy.stripe.com/dRm7sK8oZbLW6j29lM8k801', '_blank')}>Start Pro Free</button>
             </div>
             <div className="p-card">
               <div className="p-tier">Brokerage</div>
               <div className="p-price">$149<span>/mo</span></div>
               <div className="p-desc">For teams &amp; brokerages</div>
               <ul className="p-list"><li>Up to 10 agent seats</li><li>Unlimited generations</li><li>Shared team history</li><li>Custom tone presets</li></ul>
-              <button className="p-btn o" onClick={onStartFree}>Contact Us</button>
+              <button className="p-btn o" onClick={() => window.open('https://buy.stripe.com/28E00i7kV5ny9vebtU8k802', '_blank')}>Contact Us</button>
             </div>
           </div>
         </div>
@@ -550,7 +550,7 @@ function ListingAI() {
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited</div>
               </div>
             </div>
-            <button style={{ width: "100%", padding: "14px", background: "linear-gradient(135deg, #c8a96e, #a07840)", border: "none", borderRadius: "10px", color: "#0c0a06", fontFamily: "monospace", fontSize: "11px", letterSpacing: "2px", fontWeight: "bold", cursor: "pointer", marginBottom: "10px" }}>Upgrade Now →</button>
+            <button onClick={() => window.open('https://buy.stripe.com/eVq5kC5cN03e7n655w8k800', '_blank')} style={{ width: "100%", padding: "14px", background: "linear-gradient(135deg, #c8a96e, #a07840)", border: "none", borderRadius: "10px", color: "#0c0a06", fontFamily: "monospace", fontSize: "11px", letterSpacing: "2px", fontWeight: "bold", cursor: "pointer", marginBottom: "10px" }}>Upgrade Now →</button>
             <button onClick={() => setShowUpgrade(false)} style={{ background: "none", border: "none", color: "#4a3a1a", fontFamily: "monospace", fontSize: "10px", cursor: "pointer", letterSpacing: "1px" }}>Maybe later</button>
           </div>
         </div>
