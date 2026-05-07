@@ -1,4 +1,11 @@
 import { useState, useRef, useEffect } from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 // ─── LANDING PAGE COMPONENT ───────────────────────────────────────────────────
 function LandingPage({ onStartFree }) {
@@ -415,6 +422,27 @@ function ListingAI() {
   const [copiedKey, setCopiedKey] = useState(null);
   const [progress, setProgress] = useState(0);
   const [usageCount, setUsageCount] = useState(() => { return parseInt(localStorage.getItem("lai_usage") || "0"); });
+  const { user } = useUser();
+  const [userPlan, setUserPlan] = useState('free');
+  const [dbUsageCount, setDbUsageCount] = useState(0);
+
+  useEffect(() => {
+    if (user) {
+      supabase
+        .from('users')
+        .select('plan, generation_count')
+        .eq('id', user.id)
+        .single()
+        .then(({ data }) => {
+          if (data) {
+            setUserPlan(data.plan);
+            setDbUsageCount(data.generation_count);
+          } else {
+            supabase.from('users').upsert({ id: user.id, email: user.primaryEmailAddress?.emailAddress || '', plan: 'free', generation_count: 0 });
+          }
+        });
+    }
+  }, [user]);
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [onboardingStep, setOnboardingStep] = useState(0);
   const [shareToast, setShareToast] = useState(false);
@@ -448,9 +476,13 @@ function ListingAI() {
     const market = MARKETS.find(m => m.value === form.market);
     const prompt = `Generate all copy for:\nAddress: ${form.address}\nBeds: ${form.beds} | Baths: ${form.baths} | SqFt: ${form.sqft}\nPrice: $${form.price} | Year: ${form.year} | Garage: ${form.garage}\nMarket: ${market?.label} (${market?.sub})\nFeatures: ${form.features}\nNeighborhood: ${form.neighborhood}\nTarget Buyer: ${form.buyer}\nExtras: ${form.extras}`;
     try {
+      const token = await window.Clerk?.session?.getToken();
       const res = await fetch("/api/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        },
         body: JSON.stringify({ system: SYSTEM_PROMPT(form.tone, `${market?.label} (${market?.sub})`), max_tokens: 4000, messages: [{ role: "user", content: prompt }] })
       });
       const data = await res.json();
@@ -589,6 +621,7 @@ function ListingAI() {
             ))}
           </div>
           <button onClick={() => setShowUpgrade(true)} style={{ padding: "7px 16px", background: "linear-gradient(135deg,#c8a96e,#a07840)", border: "none", borderRadius: "6px", color: "#0c0a06", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", fontWeight: "bold", cursor: "pointer", textTransform: "uppercase" }}>Upgrade</button>
+          <UserButton afterSignOutUrl="/" />
         </div>
       </header>
 
@@ -810,13 +843,30 @@ function ListingAI() {
 // ─── ROOT APP COMPONENT ───────────────────────────────────────────────────────
 export default function App() {
   const [showApp, setShowApp] = useState(false);
+  const { isSignedIn, isLoaded } = useUser();
 
   const handleStartFree = () => {
     setShowApp(true);
     window.scrollTo(0, 0);
   };
 
-  if (showApp) {
+  if (!isLoaded) return null;
+
+  if (showApp && !isSignedIn) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "100vh", width: "100vw", background: "#0c0a06", gap: "20px", position: "fixed", top: 0, left: 0 }}>
+        <div style={{ fontFamily: "Cormorant Garamond, serif", fontSize: "32px", color: "#c8a96e" }}>LISTING AI</div>
+        <div style={{ fontFamily: "monospace", fontSize: "12px", color: "#8a7a5a", letterSpacing: "2px" }}>SIGN IN TO CONTINUE</div>
+        <SignInButton mode="modal">
+          <button style={{ background: "linear-gradient(135deg, #c8a96e, #a07840)", border: "none", borderRadius: "9px", padding: "15px 34px", fontFamily: "monospace", fontSize: "11px", letterSpacing: "2px", color: "#0c0a06", fontWeight: "500", cursor: "pointer" }}>
+            Sign In / Create Account
+          </button>
+        </SignInButton>
+      </div>
+    );
+  }
+
+  if (showApp && isSignedIn) {
     return <ListingAI />;
   }
 
