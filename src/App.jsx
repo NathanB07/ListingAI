@@ -428,19 +428,18 @@ function ListingAI() {
 
   useEffect(() => {
     if (user) {
-      supabase
-        .from('users')
-        .select('plan, generation_count')
-        .eq('id', user.id)
-        .single()
-        .then(({ data }) => {
-          if (data) {
-            setUserPlan(data.plan);
-            setDbUsageCount(data.generation_count);
-          } else {
-            supabase.from('users').upsert({ id: user.id, email: user.primaryEmailAddress?.emailAddress || '', plan: 'free', generation_count: 0 });
+      fetch('/api/user', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(r => r.json())
+        .then(({ user: userData }) => {
+          if (userData) {
+            setUserPlan(userData.plan);
+            setDbUsageCount(userData.generation_count);
           }
-        });
+        })
+        .catch(err => console.error('User fetch error:', err));
     }
   }, [user]);
   const [showOnboarding, setShowOnboarding] = useState(true);
