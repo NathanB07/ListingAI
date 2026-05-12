@@ -421,7 +421,7 @@ function ListingAI() {
   const [view, setView] = useState("form");
   const [copiedKey, setCopiedKey] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [usageCount, setUsageCount] = useState(() => { return parseInt(localStorage.getItem("lai_usage") || "0"); });
+  const [usageCount, setUsageCount] = useState(0);
   const { user } = useUser();
   const [userPlan, setUserPlan] = useState('free');
   const [dbUsageCount, setDbUsageCount] = useState(0);
@@ -469,7 +469,7 @@ function ListingAI() {
 
   const generate = async () => {
     if (!form.address || !form.beds || !form.price) return;
-    if (usageCount >= FREE_LIMIT) { setShowUpgrade(true); return; }
+    if (!isUnlimited && dbUsageCount >= planLimit) { setShowUpgrade(true); return; }
     setLoading(true); setOutput(""); setSections([]); setView("output"); setProgress(0);
     progressRef.current = setInterval(() => setProgress(p => Math.min(p + Math.random() * 8, 88)), 400);
     const market = MARKETS.find(m => m.value === form.market);
@@ -490,7 +490,7 @@ function ListingAI() {
       const parsed = parseSections(text);
       setSections(parsed);
       setActiveSection(0);
-      setUsageCount(c => { const next = c + 1; localStorage.setItem("lai_usage", next); return next; });
+      setUsageCount(c => c + 1);
       setHistory(h => [{ id: Date.now(), address: form.address, price: form.price, market: form.market, sections: parsed, timestamp: new Date().toLocaleString() }, ...h.slice(0, 11)]);
       clearInterval(progressRef.current); setProgress(100);
     } catch { setOutput("Connection error. Please try again."); clearInterval(progressRef.current); setProgress(0); }
@@ -513,7 +513,9 @@ function ListingAI() {
 
   const inp = (h = "auto") => ({ width: "100%", background: "rgba(200,169,110,0.04)", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "6px", padding: "11px 14px", color: "#f0ebe0", fontSize: "13.5px", fontFamily: "'Cormorant Garamond', Georgia, serif", outline: "none", boxSizing: "border-box", resize: h !== "auto" ? "vertical" : "none", minHeight: h !== "auto" ? h : undefined, lineHeight: "1.6" });
   const lbl = { display: "block", fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#8a7a5a", marginBottom: "6px", fontFamily: "monospace" };
-  const remainingGens = Math.max(0, FREE_LIMIT - usageCount);
+  const planLimit = userPlan === 'pro' || userPlan === 'brokerage' ? -1 : userPlan === 'agent' ? 75 : 5;
+  const isUnlimited = planLimit === -1;
+  const remainingGens = isUnlimited ? 999 : Math.max(0, planLimit - dbUsageCount);
 
   return (
     <div style={{ minHeight: "100vh", width: "100%", background: "#0c0a06", color: "#f0ebe0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>

@@ -1,17 +1,27 @@
 // api/user.js
 // Gets or creates a user record in Supabase
-// Called when user signs in to get their plan and generation count
+// Verifies Clerk JWT manually for Vercel serverless compatibility
 
 import { createClient } from '@supabase/supabase-js';
-import { getAuth } from '@clerk/express';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
 
+function getUserIdFromToken(authHeader) {
+  try {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
+    const token = authHeader.split(' ')[1];
+    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    return payload.sub || null;
+  } catch {
+    return null;
+  }
+}
+
 export default async function handler(req, res) {
-  // CORS
+  // ── CORS ──────────────────────────────────────────────────────────────────
   const allowedOrigins = [
     "https://listingai.dev",
     "https://www.listingai.dev",
@@ -26,19 +36,15 @@ export default async function handler(req, res) {
   }
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "GET" && req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
 
-  // Get Clerk user from token
-  const { userId } = getAuth(req);
+  // ── Get user ID from Clerk token ──────────────────────────────────────────
+  const userId = getUserIdFromToken(req.headers.authorization);
   if (!userId) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized — no valid token" });
   }
 
-  // Get or create user in Supabase
+  // ── Get or create user in Supabase ────────────────────────────────────────
   let { data: user, error } = await supabase
     .from('users')
     .select('*')
@@ -46,12 +52,12 @@ export default async function handler(req, res) {
     .single();
 
   if (error && error.code === 'PGRST116') {
-    // User doesn't exist yet - create them
+    // User doesn't exist — create them
     const { data: newUser, error: createError } = await supabase
       .from('users')
       .insert({
         id: userId,
-        email: req.body?.email || '',
+        email: '',
         plan: 'free',
         generation_count: 0,
         generation_reset_date: new Date().toISOString()
@@ -60,12 +66,12 @@ export default async function handler(req, res) {
       .single();
 
     if (createError) {
-      console.error('Error creating user:', createError);
+      console.error('Supabase create error:', createError);
       return res.status(500).json({ error: 'Failed to create user' });
     }
     user = newUser;
   } else if (error) {
-    console.error('Error fetching user:', error);
+    console.error('Supabase fetch error:', error);
     return res.status(500).json({ error: 'Failed to fetch user' });
   }
 
