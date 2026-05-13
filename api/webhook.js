@@ -59,7 +59,7 @@ export default async function handler(req, res) {
     // ── Customer subscribed (new payment) ──────────────────────────────────
     case 'checkout.session.completed': {
       const session = event.data.object;
-      const clerkUserId = session.metadata?.clerk_user_id;
+      const clerkUserId = session.metadata?.clerk_user_id || session.client_reference_id;
       const customerId = session.customer;
       const subscriptionId = session.subscription;
 
