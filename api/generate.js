@@ -124,7 +124,7 @@ export default async function handler(req, res) {
   if (!system || typeof system !== "string") {
     return res.status(400).json({ error: "Missing system prompt" });
   }
-  const safeTokens = Math.min(typeof max_tokens === "number" ? max_tokens : 4000, 4000);
+  const safeTokens = Math.min(typeof max_tokens === "number" ? max_tokens : 8000, 8000);
 
   // ── Call Anthropic ────────────────────────────────────────────────────────
   try {

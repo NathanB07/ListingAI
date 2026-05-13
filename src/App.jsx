@@ -489,7 +489,7 @@ function ListingAI() {
           "Content-Type": "application/json",
           ...(token ? { "Authorization": `Bearer ${token}` } : {})
         },
-        body: JSON.stringify({ system: SYSTEM_PROMPT(form.tone, `${market?.label} (${market?.sub})`), max_tokens: 4000, messages: [{ role: "user", content: prompt }] })
+        body: JSON.stringify({ system: SYSTEM_PROMPT(form.tone, `${market?.label} (${market?.sub})`), max_tokens: 8000, messages: [{ role: "user", content: prompt }] })
       });
       const data = await res.json();
       const text = data.content?.map(b => b.text || "").join("\n") || "Generation failed.";
@@ -618,7 +618,7 @@ function ListingAI() {
           <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
             <div style={{ display: "flex", gap: "3px" }}>
               {Array.from({ length: FREE_LIMIT }).map((_, i) => (
-                <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: i < usageCount ? "rgba(200,169,110,0.3)" : "#c8a96e", transition: "all 0.3s" }} />
+                <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: i < dbUsageCount ? "rgba(200,169,110,0.3)" : "#c8a96e", transition: "all 0.3s" }} />
               ))}
             </div>
             <span style={{ fontFamily: "monospace", fontSize: "9px", color: remainingGens > 0 ? "#8a7a5a" : "#d47a7a", letterSpacing: "1px" }}>{remainingGens} free left</span>
