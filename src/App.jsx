@@ -428,18 +428,25 @@ function ListingAI() {
 
   useEffect(() => {
     if (user) {
-      fetch('/api/user', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        })
-        .then(r => r.json())
-        .then(({ user: userData }) => {
-          if (userData) {
-            setUserPlan(userData.plan);
-            setDbUsageCount(userData.generation_count);
-          }
-        })
-        .catch(err => console.error('User fetch error:', err));
+      if (window.Clerk?.session) {
+        window.Clerk.session.getToken().then(token => {
+          fetch('/api/user', {
+            method: 'GET',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          .then(r => r.json())
+          .then(({ user: userData }) => {
+            if (userData) {
+              setUserPlan(userData.plan);
+              setDbUsageCount(userData.generation_count);
+            }
+          })
+          .catch(err => console.error('User fetch error:', err));
+        });
+      }
     }
   }, [user]);
   const [showOnboarding, setShowOnboarding] = useState(true);
