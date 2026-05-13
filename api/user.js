@@ -57,7 +57,7 @@ export default async function handler(req, res) {
       .from('users')
       .insert({
         id: userId,
-        email: '',
+        email: req.headers['x-user-email'] || '',
         plan: 'free',
         generation_count: 0,
         generation_reset_date: new Date().toISOString()
