@@ -416,7 +416,9 @@ function ListingAI() {
   const [loading, setLoading] = useState(false);
   const [sections, setSections] = useState([]);
   const [activeSection, setActiveSection] = useState(null);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('lai_history') || '[]'); } catch { return []; }
+  });
   const [favorites, setFavorites] = useState({});
   const [view, setView] = useState("form");
   const [copiedKey, setCopiedKey] = useState(null);
@@ -500,7 +502,11 @@ function ListingAI() {
       setSections(parsed);
       setActiveSection(0);
       setDbUsageCount(c => c + 1);
-      setHistory(h => [{ id: Date.now(), address: form.address, price: form.price, market: form.market, sections: parsed, timestamp: new Date().toLocaleString() }, ...h.slice(0, 11)]);
+      setHistory(h => {
+        const next = [{ id: Date.now(), address: form.address, price: form.price, market: form.market, sections: parsed, timestamp: new Date().toLocaleString() }, ...h.slice(0, 11)];
+        localStorage.setItem('lai_history', JSON.stringify(next));
+        return next;
+      });
       clearInterval(progressRef.current); setProgress(100);
     } catch { setOutput("Connection error. Please try again."); clearInterval(progressRef.current); setProgress(0); }
     setLoading(false);
