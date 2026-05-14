@@ -262,7 +262,7 @@ function LandingPage({ onStartFree }) {
               <div className="p-price">$59<span>/mo</span></div>
               <div className="p-desc">For individual agents</div>
               <ul className="p-list"><li>75 generations/month</li><li>30-day history</li><li>All 3 tones</li><li>Email support</li></ul>
-              <button className="p-btn o" onClick={() => window.open(`https://buy.stripe.com/eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')}>Start Agent Plan</button>
+              <button className="p-btn o" onClick={() => window.open(`https://buy.stripe.com/test_eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')}>Start Agent Plan</button>
             </div>
             <div className="p-card featured">
               <div className="p-badge">Most Popular</div>
@@ -587,7 +587,7 @@ function ListingAI() {
             <h2 style={{ fontSize: "28px", fontWeight: "300", marginBottom: "12px" }}>You've used all 5 free generations</h2>
             <p style={{ fontSize: "15px", color: "#8a7a5a", lineHeight: "1.8", marginBottom: "32px", fontWeight: "300" }}>Upgrade to continue generating unlimited listing copy. Agent plan starts at $59/month — less than one listing description from a copywriter.</p>
             <div style={{ display: "flex", gap: "10px", marginBottom: "16px" }}>
-              <div onClick={() => window.open(`https://buy.stripe.com/eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')} style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px", cursor: "pointer" }}>
+              <div onClick={() => window.open(`https://buy.stripe.com/test_eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')} style={{ flex: 1, padding: "20px", border: "1px solid rgba(200,169,110,0.15)", borderRadius: "12px", cursor: "pointer" }}>
                 <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", color: "#8a7a5a", marginBottom: "8px" }}>AGENT</div>
                 <div style={{ fontSize: "28px", fontWeight: "300", marginBottom: "4px" }}>$59<span style={{ fontSize: "13px", color: "#5a4a2a" }}>/mo</span></div>
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited generations</div>
@@ -598,7 +598,7 @@ function ListingAI() {
                 <div style={{ fontSize: "11px", color: "#5a4a2a" }}>Unlimited</div>
               </div>
             </div>
-            <button onClick={() => window.open(`https://buy.stripe.com/eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')} style={{ width: "100%", padding: "14px", background: "linear-gradient(135deg, #c8a96e, #a07840)", border: "none", borderRadius: "10px", color: "#0c0a06", fontFamily: "monospace", fontSize: "11px", letterSpacing: "2px", fontWeight: "bold", cursor: "pointer", marginBottom: "10px" }}>Upgrade Now →</button>
+            <button onClick={() => window.open(`https://buy.stripe.com/test_eVq5kC5cN03e7n655w8k800?client_reference_id=${window.__clerkUserId||''}`, '_blank')} style={{ width: "100%", padding: "14px", background: "linear-gradient(135deg, #c8a96e, #a07840)", border: "none", borderRadius: "10px", color: "#0c0a06", fontFamily: "monospace", fontSize: "11px", letterSpacing: "2px", fontWeight: "bold", cursor: "pointer", marginBottom: "10px" }}>Upgrade Now →</button>
             <button onClick={() => setShowUpgrade(false)} style={{ background: "none", border: "none", color: "#4a3a1a", fontFamily: "monospace", fontSize: "10px", cursor: "pointer", letterSpacing: "1px" }}>Maybe later</button>
           </div>
         </div>
