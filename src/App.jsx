@@ -861,6 +861,14 @@ export default function App() {
   const [showApp, setShowApp] = useState(false);
   const { isSignedIn, isLoaded } = useUser();
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('payment') === 'success') {
+      setShowApp(true);
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   const handleStartFree = () => {
     setShowApp(true);
     window.scrollTo(0, 0);
