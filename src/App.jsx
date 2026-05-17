@@ -625,18 +625,18 @@ function ListingAI() {
           {/* Usage indicator */}
           <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
             <div style={{ display: "flex", gap: "3px" }}>
-              {Array.from({ length: FREE_LIMIT }).map((_, i) => (
-                <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: i < dbUsageCount ? "rgba(200,169,110,0.3)" : "#c8a96e", transition: "all 0.3s" }} />
+              {!isUnlimited && Array.from({ length: Math.min(planLimit, 5) }).map((_, i) => (
+                <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: i < Math.min(dbUsageCount, planLimit) ? "rgba(200,169,110,0.3)" : "#c8a96e", transition: "all 0.3s" }} />
               ))}
             </div>
-            <span style={{ fontFamily: "monospace", fontSize: "9px", color: remainingGens > 0 ? "#8a7a5a" : "#d47a7a", letterSpacing: "1px" }}>{remainingGens} free left</span>
+            <span style={{ fontFamily: "monospace", fontSize: "9px", color: remainingGens > 0 ? "#8a7a5a" : "#d47a7a", letterSpacing: "1px" }}>{isUnlimited ? "Unlimited" : `${remainingGens} left`}</span>
           </div>
           <div style={{ display: "flex", gap: "4px" }}>
             {[{ id: "form", label: "New Listing" }, { id: "output", label: "Output" }, { id: "history", label: `History (${history.length})` }, { id: "favorites", label: `Saved (${Object.values(favorites).filter(Boolean).length})` }].map(v => (
               <button key={v.id} onClick={() => setView(v.id)} disabled={v.id === "output" && !output} style={{ padding: "6px 14px", borderRadius: "5px", border: "1px solid", cursor: v.id === "output" && !output ? "not-allowed" : "pointer", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", transition: "all 0.2s", background: view === v.id ? "rgba(200,169,110,0.12)" : "transparent", borderColor: view === v.id ? "rgba(200,169,110,0.45)" : "rgba(200,169,110,0.1)", color: view === v.id ? "#c8a96e" : "#4a3a1a", opacity: v.id === "output" && !output ? 0.3 : 1 }}>{v.label}</button>
             ))}
           </div>
-          <button onClick={() => setShowUpgrade(true)} style={{ padding: "7px 16px", background: "linear-gradient(135deg,#c8a96e,#a07840)", border: "none", borderRadius: "6px", color: "#0c0a06", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", fontWeight: "bold", cursor: "pointer", textTransform: "uppercase" }}>Upgrade</button>
+          {!isUnlimited && userPlan === 'free' && <button onClick={() => setShowUpgrade(true)} style={{ padding: "7px 16px", background: "linear-gradient(135deg,#c8a96e,#a07840)", border: "none", borderRadius: "6px", color: "#0c0a06", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", fontWeight: "bold", cursor: "pointer", textTransform: "uppercase" }}>Upgrade</button>}
           <UserButton afterSignOutUrl="/" />
         </div>
       </header>
