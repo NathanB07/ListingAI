@@ -363,13 +363,13 @@ Subject line + body. 120 words max. Conversational. Soft CTA at end.
 75-second verbal script at the front door. Top 3 features naturally. Ends making buyers want to explore.
 
 **SELLER TALKING POINTS**
-6 bullets for listing presentation. Why YOUR marketing sells homes faster.
+Exactly 6 bullets. Start each with "—". Why YOUR marketing sells homes faster and at higher prices than the competition.
 
 **NEGOTIATION POSITIONING NOTES**
 4 strategic notes for offer conversations specific to this property and market.
 
 **TOP 3 BUYER EMOTIONAL HOOKS**
-3 deep psychological reasons this specific buyer will offer. Hyper-specific.
+Exactly 3 numbered emotional hooks. Deep psychological reasons this specific buyer will make an offer. Based on the exact property details provided. Be hyper-specific to this property only.
 
 BANNED: stunning, gorgeous, beautiful, amazing, incredible, nestled, boasts, featuring, charming, spacious (use sqft), unique
 RULE: Every claim grounded in specific details provided. You are a closer, not a describer.`;
@@ -637,6 +637,7 @@ function ListingAI() {
             ))}
           </div>
           {!isUnlimited && userPlan === 'free' && <button onClick={() => setShowUpgrade(true)} style={{ padding: "7px 16px", background: "linear-gradient(135deg,#c8a96e,#a07840)", border: "none", borderRadius: "6px", color: "#0c0a06", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", fontWeight: "bold", cursor: "pointer", textTransform: "uppercase" }}>Upgrade</button>}
+{(userPlan === 'agent' || userPlan === 'pro' || userPlan === 'brokerage') && <button onClick={() => window.open('https://billing.stripe.com/p/login/eVq5kC5cN03e7n655w8k800', '_blank')} style={{ padding: "7px 16px", background: "transparent", border: "1px solid rgba(200,169,110,0.3)", borderRadius: "6px", color: "#8a7a5a", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", cursor: "pointer", textTransform: "uppercase" }}>Manage Plan</button>}
           <UserButton afterSignOutUrl="/" />
         </div>
       </header>
@@ -651,7 +652,7 @@ function ListingAI() {
           </div>
 
           {/* Usage warning */}
-          {dbUsageCount >= 3 && dbUsageCount < planLimit && !isUnlimited && (
+          {userPlan === 'free' && dbUsageCount >= 3 && dbUsageCount < planLimit && !isUnlimited && (
             <div style={{ marginBottom: "20px", padding: "12px 18px", background: "rgba(200,169,110,0.06)", border: "1px solid rgba(200,169,110,0.2)", borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span style={{ fontFamily: "monospace", fontSize: "11px", color: "#c8a96e", letterSpacing: "0.5px" }}>⚠ {remainingGens} free generation{remainingGens !== 1 ? "s" : ""} remaining</span>
               <button onClick={() => setShowUpgrade(true)} style={{ padding: "5px 14px", background: "rgba(200,169,110,0.15)", border: "1px solid rgba(200,169,110,0.3)", borderRadius: "5px", color: "#c8a96e", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", cursor: "pointer" }}>Upgrade →</button>
@@ -875,6 +876,13 @@ export default function App() {
   };
 
   if (!isLoaded) return null;
+
+  // Auto-open app for returning signed-in users
+  useEffect(() => {
+    if (isLoaded && isSignedIn && !showApp) {
+      setShowApp(true);
+    }
+  }, [isLoaded, isSignedIn]);
 
   if (showApp && !isSignedIn) {
     return (
