@@ -870,19 +870,18 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isLoaded && isSignedIn && !showApp) {
+      setShowApp(true);
+    }
+  }, [isLoaded, isSignedIn]);
+
   const handleStartFree = () => {
     setShowApp(true);
     window.scrollTo(0, 0);
   };
 
   if (!isLoaded) return null;
-
-  // Auto-open app for returning signed-in users
-  useEffect(() => {
-    if (isLoaded && isSignedIn && !showApp) {
-      setShowApp(true);
-    }
-  }, [isLoaded, isSignedIn]);
 
   if (showApp && !isSignedIn) {
     return (
