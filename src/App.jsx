@@ -366,13 +366,14 @@ Subject line + body. 120 words max. Conversational. Soft CTA at end.
 Exactly 6 bullets. Start each with "—". Why YOUR marketing sells homes faster and at higher prices than the competition.
 
 **NEGOTIATION POSITIONING NOTES**
-4 strategic notes for offer conversations specific to this property and market.
+You MUST include exactly 4 strategic negotiation notes. Number them 1-4. Each note is specific to this property's price point, market conditions, and likely buyer objections. Do not skip this section.
 
 **TOP 3 BUYER EMOTIONAL HOOKS**
-Exactly 3 numbered emotional hooks. Deep psychological reasons this specific buyer will make an offer. Based on the exact property details provided. Be hyper-specific to this property only.
+You MUST include exactly 3 emotional hooks. Number them 1-3. Each hook is a deep psychological reason this specific buyer will make an offer on THIS property specifically. Reference actual details from the property. Do not skip this section.
 
 BANNED: stunning, gorgeous, beautiful, amazing, incredible, nestled, boasts, featuring, charming, spacious (use sqft), unique
-RULE: Every claim grounded in specific details provided. You are a closer, not a describer.`;
+RULE: Every claim grounded in specific details provided. You are a closer, not a describer.
+CRITICAL: You MUST generate ALL 10 sections in EXACT order. Never skip any section. Every section header must be bold with double asterisks exactly as shown above.`;
 
 const MARKETS = [
   { value: "ultra-luxury", label: "Ultra Luxury", sub: "$2M+" },
