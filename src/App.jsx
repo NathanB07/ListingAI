@@ -553,6 +553,11 @@ function ListingAI() {
         .pulse{animation:shimmer 1.4s infinite;}
 @media(max-width:768px){
   .mob-hide{display:none!important;}
+@media(max-width:768px){
+  .view-tabs button span{display:none;}
+  #root{overflow-x:hidden!important;width:100vw!important;}
+  .header-right{flex-wrap:nowrap;overflow:hidden;max-width:calc(100vw - 120px);}
+}
   body{overflow-x:hidden;max-width:100vw;}
 }
       `}</style>
@@ -626,7 +631,7 @@ function ListingAI() {
             <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "2px", color: "#3a2a10" }}>REAL ESTATE COPY PLATFORM</div>
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", overflow: "hidden", flexShrink: 1, minWidth: 0 }}>
           {/* Usage indicator */}
           <div className="mob-hide" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
             <div style={{ display: "flex", gap: "3px" }}>
