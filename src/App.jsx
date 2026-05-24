@@ -551,6 +551,10 @@ function ListingAI() {
         @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
         .fade-in{animation:fadeUp 0.45s ease both;}
         .pulse{animation:shimmer 1.4s infinite;}
+@media(max-width:768px){
+  .mob-hide{display:none!important;}
+  body{overflow-x:hidden;}
+}
       `}</style>
 
       {/* ONBOARDING OVERLAY */}
@@ -614,7 +618,7 @@ function ListingAI() {
       )}
 
       {/* HEADER */}
-      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100 }}>
+      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, overflow: "hidden", maxWidth: "100vw" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div style={{ width: "36px", height: "36px", border: "1px solid rgba(200,169,110,0.35)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>🏛</div>
           <div>
@@ -624,7 +628,7 @@ function ListingAI() {
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           {/* Usage indicator */}
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
+          <div className="mob-hide" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
             <div style={{ display: "flex", gap: "3px" }}>
               {!isUnlimited && Array.from({ length: Math.min(planLimit, 5) }).map((_, i) => (
                 <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: i < Math.min(dbUsageCount, planLimit) ? "rgba(200,169,110,0.3)" : "#c8a96e", transition: "all 0.3s" }} />
@@ -632,7 +636,7 @@ function ListingAI() {
             </div>
             <span style={{ fontFamily: "monospace", fontSize: "9px", color: remainingGens > 0 ? "#8a7a5a" : "#d47a7a", letterSpacing: "1px" }}>{isUnlimited ? "Unlimited" : `${remainingGens} left`}</span>
           </div>
-          <div style={{ display: "flex", gap: "4px" }}>
+          <div style={{ display: "flex", gap: "4px", overflowX: "auto", maxWidth: "calc(100vw - 220px)" }}>
             {[{ id: "form", label: "New Listing" }, { id: "output", label: "Output" }, { id: "history", label: `History (${history.length})` }, { id: "favorites", label: `Saved (${Object.values(favorites).filter(Boolean).length})` }].map(v => (
               <button key={v.id} onClick={() => setView(v.id)} disabled={v.id === "output" && !output} style={{ padding: "6px 14px", borderRadius: "5px", border: "1px solid", cursor: v.id === "output" && !output ? "not-allowed" : "pointer", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", transition: "all 0.2s", background: view === v.id ? "rgba(200,169,110,0.12)" : "transparent", borderColor: view === v.id ? "rgba(200,169,110,0.45)" : "rgba(200,169,110,0.1)", color: view === v.id ? "#c8a96e" : "#4a3a1a", opacity: v.id === "output" && !output ? 0.3 : 1 }}>{v.label}</button>
             ))}
@@ -645,7 +649,7 @@ function ListingAI() {
 
       {/* FORM VIEW */}
       {view === "form" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
           <div style={{ marginBottom: "36px" }}>
             <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "4px", color: "#8a7a5a", marginBottom: "10px" }}>LISTING AI — NEW GENERATION</div>
             <h1 style={{ fontSize: "40px", fontWeight: "300", lineHeight: "1.1", marginBottom: "10px" }}>Every word your listing<br /><em style={{ color: "#c8a96e" }}>needs to sell.</em></h1>
@@ -724,7 +728,7 @@ function ListingAI() {
 
       {/* OUTPUT VIEW */}
       {view === "output" && (
-        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "36px 40px" }} className="fade-in">
+        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "36px clamp(16px, 4vw, 40px)" }} className="fade-in">
           {loading ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "60vh", gap: "28px" }}>
               <div style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "3px", color: "#8a7a5a" }}>GENERATING 10 SECTIONS</div>
@@ -794,7 +798,7 @@ function ListingAI() {
 
       {/* HISTORY VIEW */}
       {view === "history" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>GENERATION HISTORY</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Past Listings</h2>
           {history.length === 0 ? (
@@ -817,7 +821,7 @@ function ListingAI() {
 
       {/* FAVORITES VIEW */}
       {view === "favorites" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>STARRED SECTIONS</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Saved Copy</h2>
           {Object.values(favorites).filter(Boolean).length === 0 ? (
