@@ -537,7 +537,7 @@ function ListingAI() {
     <div style={{ minHeight: "100vh", width: "100%", background: "#0c0a06", color: "#f0ebe0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}html,body,#root{width:100%;min-height:100vh;max-width:100vw;overflow-x:hidden;}
+        *{box-sizing:border-box;margin:0;padding:0;}html,body,#root{width:100%;min-height:100vh;}
         ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-thumb{background:rgba(200,169,110,0.2);}
         input:focus,textarea:focus,select:focus{border-color:rgba(200,169,110,0.45)!important;box-shadow:0 0 0 3px rgba(200,169,110,0.06);outline:none;}
         .btn-main:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,169,110,0.25);}
@@ -551,15 +551,9 @@ function ListingAI() {
         @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
         .fade-in{animation:fadeUp 0.45s ease both;}
         .pulse{animation:shimmer 1.4s infinite;}
-@media(max-width:768px){
-  .mob-hide{display:none!important;}
-@media(max-width:768px){
-  .view-tabs button span{display:none;}
-  #root{overflow-x:hidden!important;width:100vw!important;}
-  .header-right{flex-wrap:nowrap;overflow:hidden;max-width:calc(100vw - 120px);}
-}
-  body{overflow-x:hidden;max-width:100vw;}
-}
+        @media(max-width:768px){
+          .mob-hide{display:none!important;}
+        }
       `}</style>
 
       {/* ONBOARDING OVERLAY */}
@@ -623,7 +617,7 @@ function ListingAI() {
       )}
 
       {/* HEADER */}
-      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, maxWidth: "100vw" }}>
+      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div style={{ width: "36px", height: "36px", border: "1px solid rgba(200,169,110,0.35)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>🏛</div>
           <div>
@@ -631,7 +625,7 @@ function ListingAI() {
             <div style={{ fontFamily: "monospace", fontSize: "9px", letterSpacing: "2px", color: "#3a2a10" }}>REAL ESTATE COPY PLATFORM</div>
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "6px", overflow: "hidden", flexShrink: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           {/* Usage indicator */}
           <div className="mob-hide" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 14px", border: "1px solid rgba(200,169,110,0.12)", borderRadius: "20px", background: "rgba(200,169,110,0.03)" }}>
             <div style={{ display: "flex", gap: "3px" }}>
@@ -641,20 +635,20 @@ function ListingAI() {
             </div>
             <span style={{ fontFamily: "monospace", fontSize: "9px", color: remainingGens > 0 ? "#8a7a5a" : "#d47a7a", letterSpacing: "1px" }}>{isUnlimited ? "Unlimited" : `${remainingGens} left`}</span>
           </div>
-          <div style={{ display: "flex", gap: "4px", overflowX: "auto", maxWidth: "calc(100vw - 220px)" }}>
+          <div className="mob-hide" style={{ display: "flex", gap: "4px" }}>
             {[{ id: "form", label: "New Listing" }, { id: "output", label: "Output" }, { id: "history", label: `History (${history.length})` }, { id: "favorites", label: `Saved (${Object.values(favorites).filter(Boolean).length})` }].map(v => (
               <button key={v.id} onClick={() => setView(v.id)} disabled={v.id === "output" && !output} style={{ padding: "6px 14px", borderRadius: "5px", border: "1px solid", cursor: v.id === "output" && !output ? "not-allowed" : "pointer", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1px", textTransform: "uppercase", transition: "all 0.2s", background: view === v.id ? "rgba(200,169,110,0.12)" : "transparent", borderColor: view === v.id ? "rgba(200,169,110,0.45)" : "rgba(200,169,110,0.1)", color: view === v.id ? "#c8a96e" : "#4a3a1a", opacity: v.id === "output" && !output ? 0.3 : 1 }}>{v.label}</button>
             ))}
           </div>
           {!isUnlimited && userPlan === 'free' && <button onClick={() => setShowUpgrade(true)} style={{ padding: "7px 16px", background: "linear-gradient(135deg,#c8a96e,#a07840)", border: "none", borderRadius: "6px", color: "#0c0a06", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", fontWeight: "bold", cursor: "pointer", textTransform: "uppercase" }}>Upgrade</button>}
-{(userPlan === 'agent' || userPlan === 'pro' || userPlan === 'brokerage') && <button onClick={() => window.open('https://billing.stripe.com/p/login/eVq5kC5cN03e7n655w8k800', '_blank')} style={{ padding: "7px 16px", background: "transparent", border: "1px solid rgba(200,169,110,0.3)", borderRadius: "6px", color: "#8a7a5a", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", cursor: "pointer", textTransform: "uppercase" }}>Manage Plan</button>}
+          {(userPlan === 'agent' || userPlan === 'pro' || userPlan === 'brokerage') && <button className="mob-hide" onClick={() => window.open('https://billing.stripe.com/p/login/eVq5kC5cN03e7n655w8k800', '_blank')} style={{ padding: "7px 16px", background: "transparent", border: "1px solid rgba(200,169,110,0.3)", borderRadius: "6px", color: "#8a7a5a", fontFamily: "monospace", fontSize: "9px", letterSpacing: "1.5px", cursor: "pointer", textTransform: "uppercase" }}>Manage Plan</button>}
           <UserButton afterSignOutUrl="/" />
         </div>
       </header>
 
       {/* FORM VIEW */}
       {view === "form" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
           <div style={{ marginBottom: "36px" }}>
             <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "4px", color: "#8a7a5a", marginBottom: "10px" }}>LISTING AI — NEW GENERATION</div>
             <h1 style={{ fontSize: "40px", fontWeight: "300", lineHeight: "1.1", marginBottom: "10px" }}>Every word your listing<br /><em style={{ color: "#c8a96e" }}>needs to sell.</em></h1>
@@ -733,7 +727,7 @@ function ListingAI() {
 
       {/* OUTPUT VIEW */}
       {view === "output" && (
-        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "36px clamp(16px, 4vw, 40px)" }} className="fade-in">
+        <div style={{ maxWidth: "1060px", margin: "0 auto", padding: "36px 40px" }} className="fade-in">
           {loading ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "60vh", gap: "28px" }}>
               <div style={{ fontFamily: "monospace", fontSize: "11px", letterSpacing: "3px", color: "#8a7a5a" }}>GENERATING 10 SECTIONS</div>
@@ -803,7 +797,7 @@ function ListingAI() {
 
       {/* HISTORY VIEW */}
       {view === "history" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>GENERATION HISTORY</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Past Listings</h2>
           {history.length === 0 ? (
@@ -826,7 +820,7 @@ function ListingAI() {
 
       {/* FAVORITES VIEW */}
       {view === "favorites" && (
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px clamp(16px, 4vw, 60px)" }} className="fade-in">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "44px 60px" }} className="fade-in">
           <div style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "3px", color: "#8a7a5a", marginBottom: "8px" }}>STARRED SECTIONS</div>
           <h2 style={{ fontSize: "32px", fontWeight: "300", marginBottom: "28px" }}>Saved Copy</h2>
           {Object.values(favorites).filter(Boolean).length === 0 ? (
@@ -864,10 +858,6 @@ function ListingAI() {
   );
 }
 
-// ─── ROOT APP — switches between landing page and app ─────────────────────────
-// This replaces the default export above temporarily
-
-// ─── ROOT APP COMPONENT ───────────────────────────────────────────────────────
 export default function App() {
   const [showApp, setShowApp] = useState(false);
   const { isSignedIn, isLoaded } = useUser();
