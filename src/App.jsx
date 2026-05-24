@@ -537,7 +537,7 @@ function ListingAI() {
     <div style={{ minHeight: "100vh", width: "100%", background: "#0c0a06", color: "#f0ebe0", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0;}html,body,#root{width:100%;min-height:100vh;}
+        *{box-sizing:border-box;margin:0;padding:0;}html,body,#root{width:100%;min-height:100vh;max-width:100vw;overflow-x:hidden;}
         ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-thumb{background:rgba(200,169,110,0.2);}
         input:focus,textarea:focus,select:focus{border-color:rgba(200,169,110,0.45)!important;box-shadow:0 0 0 3px rgba(200,169,110,0.06);outline:none;}
         .btn-main:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,169,110,0.25);}
@@ -553,7 +553,7 @@ function ListingAI() {
         .pulse{animation:shimmer 1.4s infinite;}
 @media(max-width:768px){
   .mob-hide{display:none!important;}
-  body{overflow-x:hidden;}
+  body{overflow-x:hidden;max-width:100vw;}
 }
       `}</style>
 
@@ -618,7 +618,7 @@ function ListingAI() {
       )}
 
       {/* HEADER */}
-      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, overflow: "hidden", maxWidth: "100vw" }}>
+      <header style={{ borderBottom: "1px solid rgba(200,169,110,0.12)", background: "rgba(12,10,6,0.97)", backdropFilter: "blur(20px)", padding: "0 40px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, maxWidth: "100vw" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div style={{ width: "36px", height: "36px", border: "1px solid rgba(200,169,110,0.35)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px" }}>🏛</div>
           <div>
